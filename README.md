@@ -8,7 +8,7 @@ Built using:
 - Logistic Regression
 - Scikit-learn
 - Cleveland Heart Disease Dataset
-Features:
+Features are:
 - Professional healthcare dashboard
 - Explainable risk predictions
 - Low, Moderate, and High risk categorization
