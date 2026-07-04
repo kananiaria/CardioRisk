@@ -1,16 +1,7 @@
-# React + Vite
+CardioRisk is an ML-based cardiovascular risk stratification and screening support system designed to assist early identification of patients at elevated heart disease risk.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+The system leverages structured clinical inputs such as age, blood pressure, cholesterol levels, chest pain type, ECG findings, and exercise-induced indicators to generate probabilistic risk estimates and categorize patients into low, moderate, or high-risk groups. It uses the Cleveland Heart Disease Dataset - one of the most widely used benchmark datasets for cardiovascular disease prediction.
 
-Currently, two official plugins are available:
+Developed using React, Vite, Flask, Pandas, NumPy, and Scikit-learn, the application uses a Logistic Regression model with StandardScaler to generate interpretable cardiovascular risk predictions, accompanied by feature-importance explanations and evidence-informed clinical recommendations for early risk stratification.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
-
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+This project is intended for educational and screening-support purposes only and does not replace professional medical diagnosis or treatment.
