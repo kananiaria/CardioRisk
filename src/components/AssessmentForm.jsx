@@ -8,10 +8,8 @@ import {
   ScanHeart,
   Stethoscope,
 } from "lucide-react";
-
 import InputField from "./InputField";
 import SectionCard from "./SectionCard";
-
 function AssessmentForm({ onBack }) {
   const [formData, setFormData] = useState({
     age: "",
@@ -28,24 +26,19 @@ function AssessmentForm({ onBack }) {
     ca: "",
     thal: "",
   });
-
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState(null);
   const [error, setError] = useState("");
-
   const handleChange = (field, value) => {
     setFormData((prev) => ({
       ...prev,
       [field]: value,
     }));
   };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     setError("");
     setResult(null);
-
     const requiredFields = [
       "age",
       "sex",
@@ -61,19 +54,15 @@ function AssessmentForm({ onBack }) {
       "ca",
       "thal",
     ];
-
     const hasEmptyField = requiredFields.some(
       (field) => formData[field] === ""
     );
-
     if (hasEmptyField) {
       setError("Please complete all assessment fields.");
       return;
     }
-
     try {
       setLoading(true);
-
       const response = await fetch(
         "http://127.0.0.1:5000/predict",
         {
@@ -84,15 +73,12 @@ function AssessmentForm({ onBack }) {
           body: JSON.stringify(formData),
         }
       );
-
       const data = await response.json();
-
       if (!response.ok) {
         throw new Error(
           data?.error || "Prediction request failed."
         );
       }
-
       setResult(data);
     } catch (err) {
       setError(
@@ -133,10 +119,8 @@ function AssessmentForm({ onBack }) {
         </motion.div>
 
         <form onSubmit={handleSubmit} className="space-y-8">
-          {/* ===================================================== */}
-          {/* 1. Demographics & Symptoms */}
-          {/* ===================================================== */}
-
+        
+          {/* Demographics&Symptoms*/}
           <SectionCard
             title="Demographics & Symptoms"
             subtitle="Basic patient characteristics and symptom profile"
@@ -177,7 +161,6 @@ function AssessmentForm({ onBack }) {
                   },
                 ]}
               />
-
               <InputField
                 label="Chest Pain Type (cp)"
                 type="select"
@@ -211,11 +194,8 @@ function AssessmentForm({ onBack }) {
               />
             </div>
           </SectionCard>
-
-          {/* ===================================================== */}
-          {/* 2. Vital Signs & Metabolic Indicators */}
-          {/* ===================================================== */}
-
+          
+          {/* Vital Signs & Metabolic Indicators */}
           <SectionCard
             title="Vital Signs & Metabolic Indicators"
             subtitle="Hemodynamic and biochemical parameters"
@@ -232,7 +212,6 @@ function AssessmentForm({ onBack }) {
                 placeholder="e.g. 130"
                 acceptedRange="94–200 mm Hg"
               />
-
               <InputField
                 label="Serum Cholesterol (chol)"
                 type="number"
@@ -243,7 +222,6 @@ function AssessmentForm({ onBack }) {
                 placeholder="e.g. 246"
                 acceptedRange="126–564 mg/dL"
               />
-
               <InputField
                 label="Fasting Blood Sugar > 120 mg/dL (fbs)"
                 type="select"
@@ -269,11 +247,8 @@ function AssessmentForm({ onBack }) {
               />
             </div>
           </SectionCard>
-
-          {/* ===================================================== */}
-          {/* 3. ECG & Exercise Findings */}
-          {/* ===================================================== */}
-
+          
+          {/* ECG & Exercise Findings */}
           <SectionCard
             title="ECG & Exercise Findings"
             subtitle="Electrocardiographic and exercise stress indicators"
@@ -383,10 +358,7 @@ function AssessmentForm({ onBack }) {
             </div>
           </SectionCard>
 
-          {/* ===================================================== */}
-          {/* 4. Imaging & Structural Findings */}
-          {/* ===================================================== */}
-
+          {/* Imaging & Structural Findings */}
           <SectionCard
             title="Imaging & Structural Findings"
             subtitle="Angiographic and perfusion imaging indicators"
@@ -456,7 +428,6 @@ function AssessmentForm({ onBack }) {
           </SectionCard>
 
           {/* Footer Actions */}
-
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -475,8 +446,7 @@ function AssessmentForm({ onBack }) {
                   </h3>
 
                   <p className="mt-1 text-sm text-slate-400">
-                    Risk prediction functionality will be enabled
-                    after model integration.
+                    Enter patient details and click "Assess Risk" to generate a cardiovascular risk prediction.
                   </p>
                 </div>
               </div>
@@ -490,7 +460,6 @@ function AssessmentForm({ onBack }) {
               </button>
             </div>
           </motion.div>
-
           {error && (
             <motion.div
               initial={{ opacity: 0 }}
@@ -502,7 +471,6 @@ function AssessmentForm({ onBack }) {
               </p>
             </motion.div>
           )}
-
           {result && (
             <motion.div
               initial={{ opacity: 0, y: 10 }}
@@ -550,7 +518,6 @@ function AssessmentForm({ onBack }) {
                     )}
                   </ul>
                 </div>
-
                 {result.secondary_contributors &&
                   result.secondary_contributors.length >
                     0 && (
@@ -575,7 +542,6 @@ function AssessmentForm({ onBack }) {
                   <p className="font-medium text-white">
                     Suggested Action
                   </p>
-
                   <p className="mt-1">
                     {result.suggested_action}
                   </p>
@@ -588,5 +554,4 @@ function AssessmentForm({ onBack }) {
     </div>
   );
 }
-
 export default AssessmentForm;
