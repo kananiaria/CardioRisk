@@ -143,6 +143,13 @@ REQUIRED_FIELDS = [
 ]
 
 # Predict Endpoint
+@app.route("/")
+def home():
+    return jsonify({
+        "message": "Cardiovascular Risk Prediction API is running.",
+        "endpoint": "/predict",
+        "method": "POST"
+    })
 @app.route("/predict", methods=["POST"])
 def predict():
     data = request.get_json()
